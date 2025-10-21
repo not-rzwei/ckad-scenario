@@ -1,2 +1,4 @@
 .scratchpad/
-scenarios/*/*.yaml
+scenarios/*/*
+!scenarios/*/setup/
+!scenarios/*/README.md
