@@ -3,6 +3,6 @@ kind: Kustomization
 namespace: network-test
 resources:
   - namespace.yaml
-  - frontend.yaml
-  - backend.yaml
-  - database.yaml
+  - frontend
+  - backend
+  - database

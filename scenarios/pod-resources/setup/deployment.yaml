@@ -1,0 +1,13 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: critical-app
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+      - image: nginx:alpine
+        name: critical-app
+        ports:
+        - containerPort: 80

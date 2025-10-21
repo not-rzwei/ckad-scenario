@@ -1,0 +1,13 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: database
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+      - image: stefanprodan/podinfo:6.9.0
+        name: database
+        ports:
+        - containerPort: 9898

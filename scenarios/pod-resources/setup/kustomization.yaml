@@ -3,4 +3,9 @@ kind: Kustomization
 namespace: production
 resources:
   - namespace.yaml
-  - critical-app.yaml
+  - deployment.yaml
+labels:
+  - pairs:
+      app: critical-app
+    includeSelectors: true
+    includeTemplates: true

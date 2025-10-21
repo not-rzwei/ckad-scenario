@@ -1,0 +1,13 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-app
+spec:
+  replicas: 3
+  template:
+    spec:
+      containers:
+      - image: stefanprodan/podinfo:6.9.0
+        name: backend-app
+        ports:
+        - containerPort: 9898

@@ -57,21 +57,21 @@ kubectl get networkpolicies -n network-test
 kubectl describe networkpolicy -n network-test
 
 # Test frontend to backend (should work)
-kubectl exec -it deployment/frontend -n network-test -- curl backend-service:8080
+kubectl exec -it deployment/frontend -n network-test -- curl backend:8080
 
 # Test backend to database (should work)
-kubectl exec -it deployment/backend -n network-test -- curl database-service:5432
+kubectl exec -it deployment/backend -n network-test -- curl database:5432
 
 # Test frontend to database (should be blocked)
-kubectl exec -it deployment/frontend -n network-test -- curl database-service:5432
+kubectl exec -it deployment/frontend -n network-test -- curl database:5432
 
 # Test backend to frontend (should be blocked)
-kubectl exec -it deployment/backend -n network-test -- curl frontend-service:80
+kubectl exec -it deployment/backend -n network-test -- curl frontend:80
 
 # Test database to backend (should be blocked)
-kubectl exec -it deployment/database -n network-test -- curl backend-service:8080
+kubectl exec -it deployment/database -n network-test -- curl backend:8080
 
 # Test external access to frontend (should work)
-kubectl port-forward service/frontend-service 8080:80 -n network-test
+kubectl port-forward service/frontend 8080:80 -n network-test
 # In another terminal: curl localhost:8080
 ```

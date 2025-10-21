@@ -56,18 +56,18 @@ kubectl describe pod -l app=backend-app -n backend-system
 kubectl get endpoints backend-service -n backend-system
 
 # Test readiness manipulation
-kubectl exec -it deployment/backend-app -n backend-system -- curl -X POST backend-service:8080/readyz/disable
-kubectl exec -it deployment/backend-app -n backend-system -- curl -X POST backend-service:8080/readyz/enable
+kubectl exec -it deployment/backend-app -n backend-system -- curl -X POST backend:8080/readyz/disable
+kubectl exec -it deployment/backend-app -n backend-system -- curl -X POST backend:8080/readyz/enable
 
 # Monitor pod events during startup and failures
 kubectl get events -n backend-system --sort-by='.lastTimestamp'
 
 # Test traffic routing
-kubectl exec -it deployment/backend-app -n backend-system -- curl backend-service:8080
+kubectl exec -it deployment/backend-app -n backend-system -- curl backend:8080
 
 # Test individual pod readiness (replace POD_NAME with actual pod name)
 kubectl exec -it POD_NAME -n backend-system -- curl -X POST localhost:9898/readyz/disable
-kubectl get endpoints backend-service -n backend-system  # Should show fewer endpoints
+kubectl get endpoints backend -n backend-system  # Should show fewer endpoints
 kubectl exec -it POD_NAME -n backend-system -- curl -X POST localhost:9898/readyz/enable
-kubectl get endpoints backend-service -n backend-system  # Should show all endpoints again
+kubectl get endpoints backend -n backend-system  # Should show all endpoints again
 ```
