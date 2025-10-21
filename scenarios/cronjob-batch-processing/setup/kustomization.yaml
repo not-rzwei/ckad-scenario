@@ -1,0 +1,14 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: batch
+
+resources:
+  - namespace.yaml
+
+commonLabels:
+  app: batch-processing
+  component: setup
+
+includeSelectors: true
+includeTemplates: true
