@@ -1,0 +1,58 @@
+---
+alwaysApply: true
+description: CKAD scenario structure and content guidelines
+---
+
+# Template Reference
+Always refer to `template/` directory for:
+- README-template.md: Template for scenario descriptions
+- setup/ directory: Standard setup files (namespace.yaml, kustomization.yaml)
+- README.md: Complete template creation guide
+
+# CKAD Scenario Structure Rules
+
+## Required Scenario Components
+
+### Directory Structure
+```
+scenarios/
+└── [scenario-name]/
+    ├── README.md               # Scenario description
+    └── setup/                  # Initial resources only
+        ├── namespace.yaml      # MANDATORY
+        ├── kustomization.yaml  # MANDATORY
+        └── [prerequisite-resources].yaml  # Only if needed
+```
+
+### README.md Requirements
+- **Overview**: What the scenario tests
+- **Background**: Context/situation
+- **Your Task**: Specific requirements with bullet points
+- **Success Criteria**: Measurable outcomes
+- **Verification**: Commands to test the solution
+
+### Setup Files Rules
+- **namespace.yaml**: Always required, creates the working namespace
+- **kustomization.yaml**: Must only reference prerequisite resources
+- **Other resources**: Only include context/prerequisites, never the main task resources
+
+## Writing Guidelines
+- Keep scenarios focused on specific Kubernetes concepts
+- Use realistic, real-world scenarios with business context
+- Time-bound: 10-30 minutes completion time
+- Include clear verification steps
+- Don't over-explain - let users figure out implementation
+
+## Task Design Principles
+- **Business Requirements**: Present realistic business needs that require users to infer technical solutions
+- **Specific Constraints**: Include exact values for practice consistency (image names, commands, resource names, configuration values)
+- **Balanced Approach**: Mix business context with technical constraints
+- **Avoid Handholding**: Don't specify exact Kubernetes field names or implementation details
+- **Clear Success Criteria**: Define measurable outcomes without over-specifying implementation
+
+## Example Pattern
+Instead of: "Set the job TTL to 30 seconds"
+Use: "Ensure the process doesn't run longer than 30 seconds or its condisered as failure"
+
+Instead of: "Set backoffLimit to 1"
+Use: "Allow 1 retry attempt if the job fails"

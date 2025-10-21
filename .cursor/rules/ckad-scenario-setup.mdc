@@ -1,0 +1,32 @@
+---
+alwaysApply: true
+description: CKAD scenario setup guidelines for creating practice scenarios
+---
+
+# CKAD Scenario Setup Rules
+
+## Setup File Guidelines
+
+**CRITICAL**: Only include resources in setup that are prerequisites or context. Do NOT include resources that the user is supposed to create as part of their task.
+
+### ✅ Include in setup:
+- Namespaces (always required)
+- Existing deployments, services, configmaps that provide context
+- Prerequisites that the user needs but shouldn't create themselves
+
+### ❌ Don't include in setup:
+- Pods, deployments, or other resources the user must create themselves
+- Solution files for tasks where the user creates resources
+- Any resource that is the main focus of the user's task
+
+### Examples:
+- If the task is "create a pod named cache", the setup should only include the namespace
+- If the task is "configure a service for an existing deployment", the setup should include the deployment but not the service
+- If the task is "create a deployment", don't include the deployment in setup
+
+## Scenario Structure
+- Each scenario must have a `setup/` directory with `namespace.yaml` and `kustomization.yaml`
+- The `kustomization.yaml` should only reference resources that are prerequisites
+- No solution files should be included when the user creates the main resources
+
+This ensures scenarios properly test the user's ability to create resources while providing necessary context and prerequisites.

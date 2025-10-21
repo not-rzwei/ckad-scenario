@@ -1,0 +1,37 @@
+---
+globs: scenarios/**/*.yaml,scenarios/**/kustomization.yaml
+description: CKAD kustomize patterns and file organization
+---
+
+# CKAD Kustomize Patterns
+
+## File Naming Convention
+- Avoid redundant resource kind in resource names (e.g., use `backend` not `backend-service` for Service)
+- Keep resource names clean and non-repetitive
+
+## Kustomize Structure
+- **namespace.yaml**: Only contains namespace definition, no namespace field in other resources
+- **kustomization.yaml**: Handles namespace assignment and label injection
+- **Labels**: Use `includeSelectors: true` and `includeTemplates: true` for proper label management
+
+## Multi-Component Scenarios
+For scenarios with multiple components (like network-policy):
+```
+setup/
+├── namespace.yaml
+├── kustomization.yaml
+├── component1/
+│   ├── deployment.yaml
+│   ├── service.yaml
+│   └── kustomization.yaml (with specific labels)
+└── component2/
+    ├── deployment.yaml
+    ├── service.yaml
+    └── kustomization.yaml (with specific labels)
+```
+
+## Resource Organization
+- Separate resources into individual files
+- Use component folders when different labels are needed
+- Let kustomize handle namespace and label injection
+- Never manually add namespace or labels to resource files
