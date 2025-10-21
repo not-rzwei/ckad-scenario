@@ -1,0 +1,11 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp
+spec:
+  replicas: 5
+  template:
+    spec:
+      containers:
+      - image: stefanprodan/podinfo:6.8.0
+        name: webapp
