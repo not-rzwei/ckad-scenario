@@ -1,0 +1,12 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: security
+resources:
+  - namespace.yaml
+  - deployment.yaml
+labels:
+  - pairs:
+      app: webapp
+      scenario: security-hardening
+    includeSelectors: true
+    includeTemplates: true

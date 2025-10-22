@@ -12,7 +12,14 @@ description: CKAD kustomize patterns and file organization
 ## Kustomize Structure
 - **namespace.yaml**: Only contains namespace definition, no namespace field in other resources
 - **kustomization.yaml**: Handles namespace assignment and label injection
-- **Labels**: Use `includeSelectors: true` and `includeTemplates: true` for proper label management
+- **Labels**: Use the new label pairs of kustomize, `includeSelectors: true` and `includeTemplates: true` for proper label management
+
+## CRITICAL: No Manual Labels in Resource Files
+- **NEVER** add labels manually to resource files (deployment.yaml, service.yaml, etc.)
+- **NEVER** add matchLabels or template labels manually
+- **NEVER** add selector or labels fields at all - let kustomize handle everything
+- Let kustomize handle ALL label injection through kustomization.yaml
+- The `includeSelectors: true` and `includeTemplates: true` will inject labels into both selectors and pod templates
 
 ## Multi-Component Scenarios
 For scenarios with multiple components (like network-policy):
@@ -35,3 +42,9 @@ setup/
 - Use component folders when different labels are needed
 - Let kustomize handle namespace and label injection
 - Never manually add namespace or labels to resource files
+
+## Scenario Design
+- **NO SOLUTION COMMENTS**: Never add comments that reveal what needs to be fixed
+- **NO HANDHOLDING**: Let users figure out implementation details
+- **Use Alpine images**: Prefer alpine images when no specific image is required
+- **Clean resource files**: Focus on the task, not implementation hints
