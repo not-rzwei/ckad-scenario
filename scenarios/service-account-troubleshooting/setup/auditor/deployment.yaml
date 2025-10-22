@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auditor-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: auditor-app
+  template:
+    metadata:
+      labels:
+        app: auditor-app
+    spec:
+      serviceAccountName: auditor
+      containers:
+      - name: auditor
+        image: bitnami/kubectl:latest
+        command: ["/bin/bash"]
+        args:
+        - -c
+        - |
+          while true; do
+            echo "Attempting to list pods in developer namespace..."
+            kubectl get pods -n developer
+            sleep 10
+          done
