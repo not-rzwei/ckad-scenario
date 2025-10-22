@@ -1,13 +1,15 @@
 ---
-globs: scenarios/**/*.yaml,scenarios/**/kustomization.yaml
-description: CKAD kustomize patterns and file organization
+alwaysApply: true
 ---
-
 # CKAD Kustomize Patterns
 
-## File Naming Convention
-- Avoid redundant resource kind in resource names (e.g., use `backend` not `backend-service` for Service)
+## CRITICAL: File Naming Convention
+- **NEVER** use redundant resource kind in resource names
+- **EXAMPLES**:
+  - ✅ `backend` (Service) - NOT `backend-service`
+  - ✅ `backend` (PVC) - NOT `backend-pvc`
 - Keep resource names clean and non-repetitive
+- **ALWAYS CHECK**: Does the resource name include its own kind? If yes, remove it!
 
 ## Kustomize Structure
 - **namespace.yaml**: Only contains namespace definition, no namespace field in other resources
