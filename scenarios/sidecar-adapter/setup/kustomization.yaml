@@ -1,0 +1,11 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: sidecar-adapter
+resources:
+  - namespace.yaml
+  - deployment.yaml
+labels:
+  - pairs:
+      app: sidecar-adapter
+    includeSelectors: true
+    includeTemplates: true
